@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "numerical solution for mechanics equation."
   s.authors     = ["siranovel"]
   s.email       = "siranovel@gmail.com"
-  s.homepage    = "http://github.com/siranovel/num4dynequ"
+  s.homepage    = "http://github.com/siranovel/num4mechaequation"
   s.metadata    = {
       'changelog_uri'     => s.homepage + '/blob/main/CHANGELOG.md',
       'documentation_uri' => "https://rubydoc.info/gems/#{s.name}/#{s.version}",
