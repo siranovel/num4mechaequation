@@ -4,7 +4,6 @@ num4mechaequation
 
 ## decscription ##
 
-詳細は、https://siranovel.github.io/mydocs/num4phyequation  
 
 ## Demo ##
 
