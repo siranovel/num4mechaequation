@@ -7,6 +7,8 @@ class Num4MechaEquTest
         @h0 = 0.0
         @v0 = 1.0
     end
+    #
+    # 自由落下による運動方程式テスト
     def motiEqu4freeFallEquTest
         puts 'motiEqu4freeFallTest in'
         yi_1 = []
@@ -17,6 +19,8 @@ class Num4MechaEquTest
         }
         puts
     end
+    #
+    # バネの固有振動テスト
     def springFreqEquTest
         puts 'springFreqEquTest in'
         yi_1 = []
