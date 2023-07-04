@@ -1,16 +1,18 @@
 num4mechaequation
-=============
+=================
 数値計算による力学的な方程式類を解くFFI
 
 ## decscription ##
 
+詳細は、https://siranovel.github.io/mydocs/num4phyequation/num4mechaequation 
 
 ## Demo ##
 
 ## VS. ##
 
 ## Requirement ##
-ruby FFI-compilerライブラリ
+
+ruby num4simdiffライブラリ
 
 ## Usage ##
 

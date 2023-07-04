@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'num4mechaequ'
-  s.version     = '0.0.2'
-  s.date        = '2023-06-08'
+  s.version     = '0.0.3'
+  s.date        = '2023-07-03'
   s.summary     = "num for mechanics equation!"
   s.description = "numerical solution for mechanics equation."
   s.authors     = ["siranovel"]
@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
       'changelog_uri'     => s.homepage + '/blob/main/CHANGELOG.md',
       'documentation_uri' => "https://rubydoc.info/gems/#{s.name}/#{s.version}",
       'homepage_uri'      => s.homepage,
+      'wiki_uri'          => 'https://github.com/siranovel/mydocs/tree/main/num4phyequation/num4mechaequation',
   }
   s.license     = "MIT"
   s.files       = ["LICENSE", "Gemfile", "CHANGELOG.md"]
