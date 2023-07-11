@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## [0.1.1] - 2022-07-10
+
+### Changed
+- change of function name
+  * motiEqu4freeFallEqu -> freeFallMotion
+  * springFreqEqu       -> SHM
+
+### Fixed
+- fix appointed time. (from 0 to n)
+
+### Added
+- add function of projectileMotion
+
 ## [0.0.3] - 2022-07-03
 
 ### Changed

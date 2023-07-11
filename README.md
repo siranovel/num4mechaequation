@@ -16,6 +16,8 @@ ruby num4simdiffライブラリ
 
 ## Usage ##
 
+sample/samplez.rbファイルを参照
+
 ## install ##
 
 From rubygems:  
