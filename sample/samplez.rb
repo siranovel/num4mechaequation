@@ -48,7 +48,7 @@ class Num4MechaEquTest
     end
 end
 tst = Num4MechaEquTest.new
-tst.SHMTest()
 tst.freeFallMotionTest()
 tst.projectileMotionTest()
+tst.SHMTest()
 
