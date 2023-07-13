@@ -5,16 +5,19 @@ class Num4MechaEquTest
         @k = 1.0                       # バネ定数
         @c = 0.0                       # 空気抵抗
         @m = 1.0                       # 重りの重さ
-        @h0 = 0.0                      # 初期位置
-        @v0 = 1.0                      # 初期速度
+        @h0 = 1.0                      # 初期位置
+        @v0 = 0.0                      # 初期速度
         @theta = 5 * Math::PI / 180.0  # 角度
+        @l  = 10                       # 糸の長さ
+        @r  = 3                        # 半径
+        @w  = 2                        # 角速度
     end
     #
     # 自由落下による運動方程式テスト
     def freeFallMotionTest
         puts 'freeFallMotionTest in'
         yi_1 = []
-        yi_1 = Num4MechaEquLib.freeFallMotion(@m, @c, 2, 0.0, 0.0)
+        yi_1 = Num4MechaEquLib.freeFallMotion(@m, @c, 2, @h0, @v0)
         yi_1.map{ |v|
             print v
             puts
@@ -26,7 +29,7 @@ class Num4MechaEquTest
     def projectileMotionTest
         puts 'projectileMotionTest in'
         yi_1 = []
-        yi_1 = Num4MechaEquLib.projectileMotion(@m, @theta, 1, 0.0, 3.0)
+        yi_1 = Num4MechaEquLib.projectileMotion(@m, @theta, 2, 0.0, 3.0)
         yi_1.map{ |v|
             print v
             puts
@@ -39,7 +42,31 @@ class Num4MechaEquTest
     def SHMTest
         puts 'SHMTest in'
         yi_1 = []
-        yi_1 = Num4MechaEquLib.SHM(@k, @m, 1, 1, 0)
+        yi_1 = Num4MechaEquLib.SHM(@m, @k, 2, @h0, @v0)
+        yi_1.map{ |v|
+            print v
+            puts
+        }
+        puts
+    end
+    #
+    # 等速円運動
+    def UCMTest
+        puts 'UCMTest in'
+        yi_1 = []
+        yi_1 = Num4MechaEquLib.UCM(@m, @r, @w, 2)
+        yi_1.map{ |v|
+            print v
+            puts
+        }
+        puts
+    end
+    #
+    # 振り子運動テスト
+    def pendulumMotionTest
+        puts 'pendulumMotionTest in'
+        yi_1 = []
+        yi_1 = Num4MechaEquLib.pendulumMotion(@m, @l, 2, @h0, @v0)
         yi_1.map{ |v|
             print v
             puts
@@ -51,4 +78,7 @@ tst = Num4MechaEquTest.new
 tst.freeFallMotionTest()
 tst.projectileMotionTest()
 tst.SHMTest()
+tst.UCMTest()
+tst.pendulumMotionTest()
+
 

@@ -38,15 +38,15 @@ module Num4MechaEquLib
 
         #
         # 単振動(simple harmonic motion)
-        # @overload SHM(k, m, t, h0, v0)
-        #   @param [double] k バネ定数
+        # @overload SHM(m, k, t, h0, v0)
         #   @param [double] m 重りの重さ
+        #   @param [double] k バネ定数
         #   @param [double] t 時間
         #   @param [double] h0 初期位置値
         #   @param [double] v0 初期速度
         #   @return [hash[]] 0秒からt秒までの位置(h)と速度(v)の値
         #
-        def SHM(k, m, t, h0, v0)
+        def SHM(m, k, t, h0, v0)
             @w = Math.sqrt((k / m))
             hvt = []
             yi_1 = []
@@ -111,6 +111,44 @@ module Num4MechaEquLib
               yyi = yyi_1
             }
             return hvt
+        end
+        #
+        # 等速円運動(Uniform Circular motion)
+        # @overload UCM(m, r, w, t)
+        #   @param [double] m 重りの重さ
+        #   @param [double] r 半径
+        #   @param [double] w 角速度
+        #   @param [double] t 時間
+        #   @return [hash[]] 0秒からt秒までの位置(h)と速度(v)の値
+        def UCM(m, r, w, t)
+            hvt = []
+            h = []
+            v = []
+            0.step(t, @dt) { |x|
+              sinwt = Math.sin(w * x)
+              coswt = Math.cos(w * x)
+              h = [r * coswt, r * sinwt]
+              v = [r * w * -sinwt, r * w * coswt]
+              a = [-r * w * w * coswt, -r * w * w * sinwt]
+              hvt.push({"t" => x, 
+                        "x" => {"h" => h[0], "v" => m * v[0]},
+                        "y" => {"h" => h[1], "v" => m * v[1]},
+                       }
+                      )
+            }
+            return hvt
+        end
+        #
+        # 振り子運動
+        # @overload pendulumMotion(m, l, t, h0, v0)
+        #   @param [double] m 重りの重さ
+        #   @param [double] l 糸の長さ
+        #   @param [double] t 時間
+        #   @param [double] h0 初期位置値
+        #   @param [double] v0 初期速度
+        #   @return [hash[]] 0秒からt秒までの位置(h)と速度(v)の値
+        def pendulumMotion(m, l, t, h0, v0)
+            return SHM(m, l, t, h0, v0)
         end 
     end
 end
