@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## [0.1.2] - 2022-07-13
+
+### Added
+- add function of UCM
+- add function of pendulumMotion
+
+### Fixed
+- change order of parameter of SHM
+
+  SHM(k, m, t, h0, v0) -> SHM(m, k, t, h0, v0)
+
 ## [0.1.1] - 2022-07-10
 
 ### Changed
