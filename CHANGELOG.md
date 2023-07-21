@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## [0.1.3] - 2022-07-20
+
+### Added
+- add function of DHM
+- add function of forcedOscillation
+
 ## [0.1.2] - 2022-07-13
 
 ### Added

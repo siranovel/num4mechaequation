@@ -7,8 +7,10 @@ module Num4MechaEquLib
     @g = 9.80665                       # 重力加速度(m/s2)
     @dt = 0.001                        # 時間刻み
     @w = 0.0
+    @l = 0.0
+    @ft = 0.0                          # 外力
     # 単振動
-    @springFunc = Proc.new do | n, yi |
+    @SHMFunc = Proc.new do | n, yi |
         f = []
         f[0] = yi[1]                   # hの傾き値
         f[1] = - @w * @w * yi[0]       # vの傾き値
@@ -18,7 +20,7 @@ module Num4MechaEquLib
     @motionFunc = Proc.new do | n, yi |
         f = []
         f[0] = yi[1]                   # hの傾き値
-        f[1] = - @g + @w * yi[1]       # vの傾き値
+        f[1] = @w * yi[1] - @g         # vの傾き値
         next f
     end
     # 放物運動
@@ -34,6 +36,20 @@ module Num4MechaEquLib
         f[1] = - @g                    # vの傾き値        
         next f
     end
+    # 減衰振動
+    @DHMFunc = Proc.new do | n, yi |
+        f = []
+        f[0] = yi[1]
+        f[1] = - @l * yi[1] - @w * @w * yi[0] 
+        next f
+    end
+    # 強制振動
+    @forcedFunc = Proc.new do | n, yi |
+        f = []
+        f[0] = yi[1]
+        f[1] = - @w * @w * yi[0] + @ft
+        next f
+    end 
     class << self
 
         #
@@ -52,7 +68,7 @@ module Num4MechaEquLib
             yi_1 = []
             yi = [h0, v0]
             0.step(t, @dt) { |x|
-              yi_1 = Num4SimDiffLib.rungeKuttaMethod(yi, @dt, @springFunc)
+              yi_1 = Num4SimDiffLib.rungeKuttaMethod(yi, @dt, @SHMFunc)
               hvt.push({"t" => x, 
                         "h" => yi_1[0], "v" => m * yi_1[1]})
               yi = yi_1
@@ -149,7 +165,56 @@ module Num4MechaEquLib
         #   @return [hash[]] 0秒からt秒までの位置(h)と速度(v)の値
         def pendulumMotion(m, l, t, h0, v0)
             return SHM(m, l, t, h0, v0)
-        end 
+        end
+        #
+        # 減衰振動（damped harmonic motion)
+        # @overload DHM(m, k, b, t, h0, v0)
+        #   @param [double] m 重りの重さ
+        #   @param [double] k 比例定数
+        #   @param [double] b 抵抗力の比例定数
+        #   @param [double] t 時間
+        #   @param [double] h0 初期位置値
+        #   @param [double] v0 初期速度
+        #   @return [hash[]] 0秒からt秒までの位置(h)と速度(v)の値
+        def DHM(m, k, b, t, h0, v0)
+            @l = 2 * m * b
+            @w = Math.sqrt((k / m))
+            hvt = []
+            yi_1 = []
+            yi = [h0, v0]
+            0.step(t, @dt) { |x|
+              yi_1 = Num4SimDiffLib.rungeKuttaMethod(yi, @dt, @DHMFunc)
+              hvt.push({"t" => x, 
+                        "h" => yi_1[0], "v" => m * yi_1[1]})
+              yi = yi_1
+            }
+            return hvt
+        end
+        #
+        # 強制振動
+        # @overload forcedOscillation(m, k, w0, w, t, h0, v0)
+        #   @param [double] m 重りの重さ
+        #   @param [double] k 比例定数
+        #   @param [double] w0 振動系の固有角振動
+        #   @param [double] w 外力の角振動数
+        #   @param [double] t 時間
+        #   @param [double] h0 初期位置値
+        #   @param [double] v0 初期速度
+        #   @return [hash[]] 0秒からt秒までの位置(h)と速度(v)の値
+        def forcedOscillation(m, k, w0, w, t, h0, v0)
+            @w = Math.sqrt((k / m))
+            hvt = []
+            yi_1 = []
+            yi = [h0, v0]
+            0.step(t, @dt) { |x|
+              @ft = w / m * Math.cos(w * x)
+              yi_1 = Num4SimDiffLib.rungeKuttaMethod(yi, @dt, @forcedFunc)
+              hvt.push({"t" => x, 
+                        "h" => yi_1[0], "v" => m * yi_1[1]})
+              yi = yi_1
+            }
+            return hvt
+        end
     end
 end
 
