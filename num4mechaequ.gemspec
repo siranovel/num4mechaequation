@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'num4mechaequ'
-  s.version     = '0.1.3'
-  s.date        = '2023-07-20'
+  s.version     = '0.1.4'
+  s.date        = '2023-10-18'
   s.summary     = "num for mechanics equation!"
   s.description = "numerical solution for mechanics equation."
   s.authors     = ["siranovel"]

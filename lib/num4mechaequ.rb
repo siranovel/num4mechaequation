@@ -52,8 +52,8 @@ module Num4MechaEquLib
     end 
     class << self
 
-        #
         # 単振動(simple harmonic motion)
+        #
         # @overload SHM(m, k, t, h0, v0)
         #   @param [double] m 重りの重さ
         #   @param [double] k バネ定数
@@ -61,6 +61,12 @@ module Num4MechaEquLib
         #   @param [double] h0 初期位置値
         #   @param [double] v0 初期速度
         #   @return [hash[]] 0秒からt秒までの位置(h)と速度(v)の値
+        # @example
+        #   m = 1.0
+        #   k = 1.0
+        #   h0 = 1.0
+        #   v0 = 0.0
+        #   yi_1 = Num4MechaEquLib.SHM(m, k, 2, h0, v0)
         #
         def SHM(m, k, t, h0, v0)
             @w = Math.sqrt((k / m))
@@ -75,8 +81,8 @@ module Num4MechaEquLib
             }
             return hvt
         end
-        #
         # 自由落下による運動方程式(空気抵抗有り)
+        #
         # @overload freeFallMotion(m, c, t, h0, v0)
         #   @param [double] m 重りの重さ
         #   @param [double] c 空気抵抗
@@ -84,6 +90,12 @@ module Num4MechaEquLib
         #   @param [double] h0 初期位置値
         #   @param [double] v0 初期速度
         #   @return [hash[]] 0秒からt秒までの位置(h)と速度(v)の値
+        # @example
+        #   m = 1.0
+        #   c = 0.0
+        #   h0 = 1.0
+        #   v0 = 0.0
+        #   yi_1 = Num4MechaEquLib.freeFallMotion(m, c, 2, h0, v0)
         #
         def freeFallMotion(m, c, t, h0, v0)
             @w = c / m
@@ -99,8 +111,8 @@ module Num4MechaEquLib
             return hvt
 
         end
-        #
         # 放物運動
+        #
         # @overload projectileMotion(m, theta, t, h0, v0)
         #   @param [double] m     重りの重さ
         #   @param [double] theta 角度(ラジアン指定)
@@ -108,6 +120,10 @@ module Num4MechaEquLib
         #   @param [double] h0 初期位置値
         #   @param [double] v0 初期速度
         #   @return [hash[]] 0秒からt秒までの位置(h)と速度(v)の値
+        # @example
+        #   m = 1.0
+        #   theta = 5 * Math::PI / 180.0
+        #   yi_1 = Num4MechaEquLib.projectileMotion(m, theta, 2, 0.0, 3.0)
         #
         def projectileMotion(m, theta, t, h0, v0)
             hvt = []
@@ -128,14 +144,20 @@ module Num4MechaEquLib
             }
             return hvt
         end
-        #
         # 等速円運動(Uniform Circular motion)
+        #
         # @overload UCM(m, r, w, t)
         #   @param [double] m 重りの重さ
         #   @param [double] r 半径
         #   @param [double] w 角速度
         #   @param [double] t 時間
         #   @return [hash[]] 0秒からt秒までの位置(h)と速度(v)の値
+        # @example
+        #   m = 1.0
+        #   r  = 3
+        #   w  = 2
+        #   yi_1 = Num4MechaEquLib.UCM(m, r, w, 2)
+        #
         def UCM(m, r, w, t)
             hvt = []
             h = []
@@ -154,8 +176,8 @@ module Num4MechaEquLib
             }
             return hvt
         end
-        #
         # 振り子運動
+        #
         # @overload pendulumMotion(m, l, t, h0, v0)
         #   @param [double] m 重りの重さ
         #   @param [double] l 糸の長さ
@@ -163,11 +185,18 @@ module Num4MechaEquLib
         #   @param [double] h0 初期位置値
         #   @param [double] v0 初期速度
         #   @return [hash[]] 0秒からt秒までの位置(h)と速度(v)の値
+        # @example
+        #   m = 1.0
+        #   l  = 10
+        #   h0 = 1.0
+        #   v0 = 0.0
+        #   yi_1 = Num4MechaEquLib.pendulumMotion(m, l, 2, h0, v0)
+        #
         def pendulumMotion(m, l, t, h0, v0)
             return SHM(m, l, t, h0, v0)
         end
-        #
         # 減衰振動（damped harmonic motion)
+        #
         # @overload DHM(m, k, b, t, h0, v0)
         #   @param [double] m 重りの重さ
         #   @param [double] k 比例定数
@@ -176,6 +205,13 @@ module Num4MechaEquLib
         #   @param [double] h0 初期位置値
         #   @param [double] v0 初期速度
         #   @return [hash[]] 0秒からt秒までの位置(h)と速度(v)の値
+        # @example
+        #   m = 1.0
+        #   k = 1.0
+        #   h0 = 1.0
+        #   v0 = 0.0
+        #   yi_1 = Num4MechaEquLib.DHM(m, k, 0.6, 2, h0, v0)
+        #
         def DHM(m, k, b, t, h0, v0)
             @l = 2 * m * b
             @w = Math.sqrt((k / m))
@@ -190,8 +226,8 @@ module Num4MechaEquLib
             }
             return hvt
         end
-        #
         # 強制振動
+        #
         # @overload forcedOscillation(m, k, w0, w, t, h0, v0)
         #   @param [double] m 重りの重さ
         #   @param [double] k 比例定数
@@ -201,6 +237,14 @@ module Num4MechaEquLib
         #   @param [double] h0 初期位置値
         #   @param [double] v0 初期速度
         #   @return [hash[]] 0秒からt秒までの位置(h)と速度(v)の値
+        # @example
+        #   m = 1.0
+        #   k = 1.0
+        #   f0 = 2.5
+        #   h0 = 1.0
+        #   v0 = 0.0
+        #   yi_1 = Num4MechaEquLib.forcedOscillation(m, k, 0.6, f0, 2, h0, v0)
+        #
         def forcedOscillation(m, k, w0, w, t, h0, v0)
             @w = Math.sqrt((k / m))
             hvt = []
