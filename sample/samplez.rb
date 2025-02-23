@@ -100,12 +100,12 @@ class Num4MechaEquTest
     end
 end
 tst = Num4MechaEquTest.new
-tst.freeFallMotionTest()
-tst.projectileMotionTest()
-tst.SHMTest()
-tst.UCMTest()
-tst.pendulumMotionTest()
-tst.DHMTest()
+#tst.freeFallMotionTest()
+#tst.projectileMotionTest()
+#tst.SHMTest()
+#tst.UCMTest()
+#tst.pendulumMotionTest()
+#tst.DHMTest()
 tst.forcedOscillationTest()
 
 
