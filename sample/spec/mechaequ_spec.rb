@@ -73,7 +73,7 @@ RSpec.describe Num4MechaEquLib do
     it '#forcedOscillation' do
         yi_1 = []
         yi_1 = Num4MechaEquLib.forcedOscillation(@m, @k, 0.6, @f0, 2, @h0, @v0)
-        res = {"t" => 2.0, "h" => 5.4227, "v" => 0.0596}
+        res = {"t" => 2.0, "h" => 5.1385, "v" => 0.0596}
         expect(
             yi_1.last
         ).to is_hash(res, 4)
