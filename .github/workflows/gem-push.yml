@@ -22,9 +22,9 @@ jobs:
       run: |
         ruby -S gem build *.gemspec
         ruby -S gem install *.gem
-        #　cd sample
-        #　rake -f mecha.rk spec
-        ruby -S sample/samplez.rb
+        cd sample
+        rake -f mecha.rk spec
+        #ruby -S sample/samplez.rb
   deploy:
     name: Publish
     runs-on: ubuntu-latest
