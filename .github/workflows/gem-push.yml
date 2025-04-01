@@ -1,4 +1,4 @@
-name: Ruby Gem(dmy)
+name: Ruby Gem
 
 on:
   push:
