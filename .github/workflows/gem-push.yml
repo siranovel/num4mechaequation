@@ -16,7 +16,9 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.1.1
-    - run: bundle install
+    - run: |
+        gem install ffi-compiler
+        bundle install
       env:
         BUNDLE_RUBYGEMS__PKG__GITHUB__COM: ${{ secrets.GITHUB_TOKEN }}
     - run: gem install rspec
